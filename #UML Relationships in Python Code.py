@@ -76,41 +76,50 @@ my_scholar = Scholar("Geerda")
 lesson1 = Lesson("Math 10101")
 lesson2 = Lesson("English 9901029301")
 
-my_scholar.enroll(lesson1)
-my_scholar.enroll(lesson2)
+my_scholar.enroll([lesson1, lesson2])
 
 print(f"Student {my_scholar.name} has the lessons: {my_scholar.lessons}")
 
 
 #Dependency
-class Blackboard:
-   def __init__(self, size):
+class PresentingArea:
+   def __init__(self, item, size: float):
       self.size = size
+      self.item = item
 
 class Teacher:
   def __init__(self, name):
     self.name = name
 
-  def teach(self, blackboard: Blackboard):
-    print(f"Teacher {self.name} is teaching.")
-    blackboard.present()
+  def teach(self, area: PresentingArea):
+    print(f"Teacher {self.name} is teaching on the {area}.")
+
+my_blackboard = PresentingArea("blackboard", 20)
+
+my_teacher = Teacher("Darthy")
+
+my_teacher.teach(my_blackboard.item)
+
 
 
 #Realization/Implementation
 from abc import ABC, abstractmethod
 
+# Realization/Implementation
 class Presentable(ABC):
-  @abstractmethod
-  def present(self):
-    pass
+    @abstractmethod
+    def present(self):
+        pass
 
-class Whiteboard(Presentable):  # Realizes/implements Presentable
-  def __init__(self, color="White"):
-    self.color = color
+class Whiteboard(Presentable): 
+    def __init__(self, color="White"):
+        self.color = color
 
-  def present(self):
-    print(f"Displaying notes on the {self.color} whiteboard.")
+    def present(self):
+        print(f"Displaying notes on the {self.color} whiteboard.")
 
+if __name__ == "__main__":
+    my_whiteboard = Whiteboard()
 
-
+    my_whiteboard.present()
 
